@@ -4,7 +4,7 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>Academia de Arte MC | Maxi Cortez</title>
-  <meta name="description" content="Inscripción Academia de Arte MC. Galería de alumnos. Mundo Lapicini. Profesor Maxi Cortez." />
+  <meta name="description" content="Plataforma Academia de Arte MC. Registro, inscripción, galería y Mundo Lapicini." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,18 +15,15 @@
       --bg1:#032f2b;
       --bg2:#0a6b63;
       --card: rgba(255,255,255,.10);
-      --card2: rgba(255,255,255,.14);
       --stroke: rgba(255,255,255,.18);
       --txt: rgba(255,255,255,.92);
       --muted: rgba(255,255,255,.70);
       --accent:#32e3c0;
       --accent2:#00bcd4;
       --danger:#ff5d5d;
-      --ok:#39d98a;
       --shadow: 0 18px 55px rgba(0,0,0,.35);
       --radius: 18px;
     }
-
     *{box-sizing:border-box}
     body{
       margin:0;
@@ -38,50 +35,29 @@
       min-height:100vh;
       overflow-x:hidden;
     }
-
     .wrap{
       width:min(1100px, 92vw);
       margin:22px auto 40px;
       position:relative;
     }
-
-    /* Decoraciones: logo y lapicini (tus PNG en repo) */
     .deco{
-      position:absolute;
-      inset:0;
-      pointer-events:none;
-      z-index:0;
+      position:absolute; inset:0; pointer-events:none; z-index:0;
     }
     .deco img{
       position:absolute;
       opacity:.18;
       filter: drop-shadow(0 20px 40px rgba(0,0,0,.5));
-      transform: translateZ(0);
     }
-    .deco .logo{
-      width:170px;
-      left:-30px;
-      top:-20px;
-    }
-    .deco .lapicini{
-      width:240px;
-      right:-40px;
-      bottom:-40px;
-      opacity:.22;
-    }
-
+    .deco .logo{ width:170px; left:-30px; top:-20px; }
+    .deco .lapicini{ width:240px; right:-40px; bottom:-40px; opacity:.22; }
     @media (max-width:520px){
       .deco .logo{ width:120px; left:-18px; top:-10px; opacity:.14;}
       .deco .lapicini{ width:170px; right:-25px; bottom:-25px; opacity:.16;}
     }
 
     header{
-      position:relative;
-      z-index:1;
-      display:flex;
-      gap:14px;
-      align-items:center;
-      justify-content:space-between;
+      position:relative; z-index:1;
+      display:flex; gap:14px; align-items:center; justify-content:space-between;
       padding:18px 16px;
       border:1px solid var(--stroke);
       border-radius: var(--radius);
@@ -89,13 +65,7 @@
       box-shadow: var(--shadow);
       backdrop-filter: blur(12px);
     }
-
-    .brand{
-      display:flex;
-      gap:12px;
-      align-items:center;
-      min-width:0;
-    }
+    .brand{ display:flex; gap:12px; align-items:center; min-width:0; }
     .brand-badge{
       width:44px;height:44px;border-radius:14px;
       border:1px solid var(--stroke);
@@ -104,74 +74,45 @@
       box-shadow: 0 12px 30px rgba(0,0,0,.22);
       flex:0 0 auto;
     }
-    .brand-badge span{
-      font-weight:800;
-      letter-spacing:.5px;
-    }
-
+    .brand-badge span{ font-weight:800; letter-spacing:.5px; }
     .brand h1{
       margin:0;
       font-size: clamp(16px, 2.2vw, 22px);
       line-height:1.1;
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
     }
     .brand p{
       margin:2px 0 0;
       font-size:12px;
       color:var(--muted);
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
     }
 
-    .header-actions{
-      display:flex;
-      gap:10px;
-      align-items:center;
-      flex-wrap:wrap;
-      justify-content:flex-end;
-    }
-
+    .header-actions{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; justify-content:flex-end; }
     .pill{
-      display:inline-flex;
-      gap:8px;
-      align-items:center;
-      padding:10px 12px;
-      border-radius:999px;
+      display:inline-flex; gap:8px; align-items:center;
+      padding:10px 12px; border-radius:999px;
       border:1px solid var(--stroke);
       background: rgba(255,255,255,.08);
-      color:var(--txt);
-      font-size:12px;
-      cursor:pointer;
-      text-decoration:none;
-      user-select:none;
+      color:var(--txt); font-size:12px;
+      cursor:pointer; text-decoration:none; user-select:none;
       transition:.2s;
     }
     .pill:hover{ transform: translateY(-1px); background: rgba(255,255,255,.12); }
-
     .pill.primary{
       background: linear-gradient(135deg, rgba(50,227,192,.90), rgba(0,188,212,.75));
-      border:0;
-      color:#052a26;
-      font-weight:700;
+      border:0; color:#052a26; font-weight:700;
     }
 
     main{
-      position:relative;
-      z-index:1;
+      position:relative; z-index:1;
       margin-top:16px;
       display:grid;
       grid-template-columns: 280px 1fr;
       gap:14px;
     }
+    @media (max-width:900px){ main{ grid-template-columns: 1fr; } }
 
-    @media (max-width:900px){
-      main{ grid-template-columns: 1fr; }
-    }
-
-    /* Sidebar */
     .sidebar{
       border:1px solid var(--stroke);
       border-radius: var(--radius);
@@ -180,20 +121,11 @@
       backdrop-filter: blur(12px);
       overflow:hidden;
     }
-
-    .tabs{
-      display:flex;
-      flex-direction:column;
-    }
-
+    .tabs{ display:flex; flex-direction:column; }
     .tab-btn{
-      border:0;
-      background: transparent;
-      color:var(--txt);
+      border:0; background: transparent; color:var(--txt);
       padding:14px 14px;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
+      display:flex; justify-content:space-between; align-items:center;
       cursor:pointer;
       border-bottom:1px solid rgba(255,255,255,.08);
       transition:.15s;
@@ -205,7 +137,6 @@
     }
     .tab-btn small{ color:var(--muted); font-size:11px; }
 
-    /* Content */
     .content{
       border:1px solid var(--stroke);
       border-radius: var(--radius);
@@ -214,38 +145,15 @@
       backdrop-filter: blur(12px);
       overflow:hidden;
     }
-
-    .section{
-      display:none;
-      padding:16px;
-    }
+    .section{ display:none; padding:16px; }
     .section.active{ display:block; }
 
-    .title{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:12px;
-      margin-bottom:12px;
-    }
-    .title h2{
-      margin:0;
-      font-size:18px;
-    }
-    .title p{
-      margin:6px 0 0;
-      color:var(--muted);
-      font-size:13px;
-    }
+    .title{ display:flex; align-items:flex-start; justify-content:space-between; gap:12px; margin-bottom:12px; }
+    .title h2{ margin:0; font-size:18px; }
+    .title p{ margin:6px 0 0; color:var(--muted); font-size:13px; }
 
-    .grid{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:12px;
-    }
-    @media (max-width:700px){
-      .grid{ grid-template-columns: 1fr; }
-    }
+    .grid{ display:grid; grid-template-columns: 1fr 1fr; gap:12px; }
+    @media (max-width:700px){ .grid{ grid-template-columns: 1fr; } }
 
     .card{
       background: linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.06));
@@ -253,13 +161,7 @@
       border-radius: var(--radius);
       padding:14px;
     }
-
-    label{
-      display:block;
-      margin:10px 0 6px;
-      font-size:12px;
-      color:var(--muted);
-    }
+    label{ display:block; margin:10px 0 6px; font-size:12px; color:var(--muted); }
     input, select, textarea{
       width:100%;
       padding:12px 12px;
@@ -271,26 +173,16 @@
       font-size:14px;
     }
     textarea{ min-height:90px; resize:vertical; }
-
-    .row{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-    }
+    .row{ display:flex; gap:10px; flex-wrap:wrap; }
 
     .btn{
-      border:0;
-      border-radius:14px;
+      border:0; border-radius:14px;
       padding:12px 14px;
-      cursor:pointer;
-      font-weight:700;
+      cursor:pointer; font-weight:700;
       transition:.18s;
-      display:inline-flex;
-      gap:8px;
-      align-items:center;
-      justify-content:center;
-      text-decoration:none;
-      user-select:none;
+      display:inline-flex; gap:8px;
+      align-items:center; justify-content:center;
+      text-decoration:none; user-select:none;
     }
     .btn.primary{
       background: linear-gradient(135deg, rgba(50,227,192,.95), rgba(0,188,212,.75));
@@ -308,24 +200,19 @@
     }
     .btn:hover{ transform: translateY(-1px); }
 
-    .hint{
-      font-size:12px;
-      color:var(--muted);
-      margin:10px 0 0;
+    .hint{ font-size:12px; color:var(--muted); margin:10px 0 0; }
+    .hr{ height:1px; background: rgba(255,255,255,.10); margin:14px 0; }
+
+    .badge{
+      display:inline-flex; gap:6px; align-items:center;
+      padding:6px 10px; border-radius:999px;
+      border:1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.08);
+      font-size:12px; color:var(--txt);
+      white-space:nowrap;
     }
 
-    .hr{
-      height:1px;
-      background: rgba(255,255,255,.10);
-      margin:14px 0;
-    }
-
-    /* Gallery */
-    .gallery{
-      display:grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap:10px;
-    }
+    .gallery{ display:grid; grid-template-columns: repeat(4, 1fr); gap:10px; }
     @media (max-width:1000px){ .gallery{ grid-template-columns: repeat(3, 1fr);} }
     @media (max-width:700px){ .gallery{ grid-template-columns: repeat(2, 1fr);} }
     @media (max-width:430px){ .gallery{ grid-template-columns: 1fr;} }
@@ -337,28 +224,16 @@
       overflow:hidden;
       position:relative;
     }
-    .thumb img{
-      width:100%;
-      height:170px;
-      object-fit:cover;
-      display:block;
-    }
-    .thumb .cap{
-      padding:10px;
-      font-size:12px;
-      color:var(--muted);
-    }
+    .thumb img{ width:100%; height:170px; object-fit:cover; display:block; }
+    .thumb .cap{ padding:10px; font-size:12px; color:var(--muted); }
     .thumb .tag{
-      position:absolute;
-      top:10px; left:10px;
+      position:absolute; top:10px; left:10px;
       background: rgba(0,0,0,.45);
       border:1px solid rgba(255,255,255,.18);
-      padding:6px 10px;
-      border-radius:999px;
+      padding:6px 10px; border-radius:999px;
       font-size:11px;
     }
 
-    /* Admin table */
     table{
       width:100%;
       border-collapse: collapse;
@@ -377,20 +252,6 @@
     td{ color:rgba(255,255,255,.90); }
     .small{ font-size:12px; color:var(--muted); }
 
-    .badge{
-      display:inline-flex;
-      gap:6px;
-      align-items:center;
-      padding:6px 10px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.16);
-      background: rgba(255,255,255,.08);
-      font-size:12px;
-      color:var(--txt);
-      white-space:nowrap;
-    }
-
-    /* Video embed responsive */
     .video{
       aspect-ratio: 16 / 9;
       width:100%;
@@ -408,10 +269,161 @@
       font-size:12px;
       text-align:center;
     }
+
+    /* ===== LOGIN GATE ===== */
+    .gate{
+      position:fixed;
+      inset:0;
+      z-index:9999;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+      background: radial-gradient(900px 450px at 20% 10%, rgba(50,227,192,.25), transparent 60%),
+                  radial-gradient(700px 400px at 80% 25%, rgba(0,188,212,.20), transparent 60%),
+                  rgba(0,0,0,.55);
+      backdrop-filter: blur(10px);
+    }
+    .gate.show{ display:flex; }
+    .gate-box{
+      width:min(960px, 94vw);
+      border:1px solid rgba(255,255,255,.20);
+      border-radius: 22px;
+      overflow:hidden;
+      box-shadow: 0 30px 90px rgba(0,0,0,.55);
+      background: linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.06));
+    }
+    .gate-head{
+      padding:18px 16px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      border-bottom:1px solid rgba(255,255,255,.10);
+    }
+    .gate-title{
+      display:flex; gap:10px; align-items:center; min-width:0;
+    }
+    .gate-title h2{
+      margin:0; font-size:16px; line-height:1.1;
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    }
+    .gate-title p{ margin:2px 0 0; color:var(--muted); font-size:12px; }
+
+    .gate-body{ padding:16px; display:grid; grid-template-columns: 1.1fr .9fr; gap:12px; }
+    @media (max-width:860px){ .gate-body{ grid-template-columns: 1fr; } }
+
+    .gate-hero{
+      border:1px solid rgba(255,255,255,.14);
+      border-radius:18px;
+      padding:14px;
+      background: rgba(0,0,0,.12);
+      position:relative;
+      overflow:hidden;
+    }
+    .gate-hero img{
+      width:110px;
+      opacity:.18;
+      position:absolute;
+      right:-10px;
+      bottom:-10px;
+      filter: drop-shadow(0 14px 28px rgba(0,0,0,.5));
+    }
+
+    .split{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .chip{
+      padding:8px 10px;
+      border:1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.06);
+      border-radius:999px;
+      font-size:12px;
+      color:rgba(255,255,255,.82);
+    }
   </style>
 </head>
 
 <body>
+  <!-- LOGIN / REGISTER GATE -->
+  <div class="gate" id="gate">
+    <div class="gate-box">
+      <div class="gate-head">
+        <div class="gate-title">
+          <div class="brand-badge" aria-hidden="true"><span>MC</span></div>
+          <div style="min-width:0">
+            <h2>Acceso a Academia de Arte MC & Mundo Lapicini</h2>
+            <p>Registrate o ingresá para continuar • Profes. Maxi Cortez</p>
+          </div>
+        </div>
+        <span class="badge">maurocortez17@gmail.com</span>
+      </div>
+
+      <div class="gate-body">
+        <div class="gate-hero">
+          <h3 style="margin:0 0 6px">¿Qué vas a encontrar adentro?</h3>
+          <p class="small" style="margin:0 0 10px">
+            Inscripción por sedes y turnos, galería de obras, y el <b>Mundo Lapicini</b>.
+            El <b>Capítulo 1</b> se desbloquea con acceso habilitado (pago confirmado).
+          </p>
+
+          <div class="split">
+            <span class="chip">Río Cuarto</span>
+            <span class="chip">Las Vertientes</span>
+            <span class="chip">Alcira Gigena</span>
+            <span class="chip">Galería de alumnos</span>
+            <span class="chip">Capítulo 1 bloqueado</span>
+          </div>
+
+          <img src="lapicini.png" alt="Lapicini"/>
+          <div class="hr"></div>
+          <a class="btn ghost" href="mailto:maurocortez17@gmail.com">Contactar por email</a>
+        </div>
+
+        <div class="card">
+          <div class="row" style="justify-content:space-between;align-items:center">
+            <h3 style="margin:0">Ingresar</h3>
+            <button class="btn ghost" id="btnSwitchGate" type="button">Crear cuenta</button>
+          </div>
+
+          <div id="loginBox">
+            <label>Email</label>
+            <input id="loginEmail" type="email" placeholder="tuemail@gmail.com"/>
+
+            <label>Contraseña</label>
+            <input id="loginPass" type="password" placeholder="tu contraseña"/>
+
+            <div class="row" style="margin-top:12px">
+              <button class="btn primary" id="btnLogin" type="button">Ingresar</button>
+              <button class="btn danger" id="btnResetLocal" type="button">Borrar sesión</button>
+            </div>
+            <p class="hint">Si sos alumno nuevo, tocá “Crear cuenta”.</p>
+          </div>
+
+          <div id="registerBox" style="display:none">
+            <label>Nombre completo</label>
+            <input id="regNombre" placeholder="Ej: Juan Pérez"/>
+
+            <label>Email</label>
+            <input id="regEmail" type="email" placeholder="Ej: alumno@gmail.com"/>
+
+            <label>Contraseña</label>
+            <input id="regPass" type="password" placeholder="Elegí una contraseña"/>
+
+            <div class="row" style="margin-top:12px">
+              <button class="btn primary" id="btnRegister" type="button">Crear cuenta</button>
+              <button class="btn ghost" id="btnBackLogin" type="button">Volver</button>
+            </div>
+            <p class="hint">Al crear la cuenta, entrás a la plataforma. El Capítulo 1 se habilita luego del pago.</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="wrap">
     <div class="deco">
       <img class="logo" src="logo.png" alt="Logo Academia de Arte MC">
@@ -423,34 +435,25 @@
         <div class="brand-badge" aria-hidden="true"><span>MC</span></div>
         <div style="min-width:0">
           <h1>Academia de Arte MC — Maxi Cortez</h1>
-          <p>Profesional • Para todas las edades • Sin conocimientos previos</p>
+          <p id="userLine">Profesional • Para todas las edades • Sin conocimientos previos</p>
         </div>
       </div>
 
       <div class="header-actions">
-        <a class="pill primary" id="btnWhatsappHeader" href="#" target="_blank" rel="noopener">WhatsApp Inscripción</a>
+        <a class="pill primary" id="btnWhatsappHeader" href="#" target="_blank" rel="noopener">WhatsApp</a>
         <a class="pill" href="mailto:maurocortez17@gmail.com">maurocortez17@gmail.com</a>
+        <button class="pill" id="btnLogout" type="button">Salir</button>
       </div>
     </header>
 
     <main>
       <aside class="sidebar">
         <div class="tabs" id="tabs">
-          <button class="tab-btn active" data-tab="inscripcion">
-            Inscripción <small>zonas y turnos</small>
-          </button>
-          <button class="tab-btn" data-tab="galeria">
-            Galería <small>obras de alumnos</small>
-          </button>
-          <button class="tab-btn" data-tab="lapicini">
-            Mundo Lapicini <small>capítulos y tienda</small>
-          </button>
-          <button class="tab-btn" data-tab="sobre">
-            Sobre Maxi <small>historia y redes</small>
-          </button>
-          <button class="tab-btn" data-tab="admin">
-            Panel Admin MC <small>gestión básica</small>
-          </button>
+          <button class="tab-btn active" data-tab="inscripcion">Inscripción <small>zonas y turnos</small></button>
+          <button class="tab-btn" data-tab="galeria">Galería <small>obras de alumnos</small></button>
+          <button class="tab-btn" data-tab="lapicini">Mundo Lapicini <small>capítulo 1 bloqueado</small></button>
+          <button class="tab-btn" data-tab="sobre">Sobre Maxi <small>historia y redes</small></button>
+          <button class="tab-btn" data-tab="admin" id="tabAdmin">Panel Admin MC <small>solo profe</small></button>
         </div>
       </aside>
 
@@ -475,9 +478,6 @@
               <label>Correo electrónico</label>
               <input id="inEmail" type="email" placeholder="Ej: alumno@gmail.com"/>
 
-              <label>Contraseña</label>
-              <input id="inPass" type="password" placeholder="Elegí una contraseña"/>
-
               <label>Selecciona la zona</label>
               <select id="inZona">
                 <option value="Río Cuarto">Río Cuarto</option>
@@ -491,15 +491,16 @@
               </select>
 
               <div class="row" style="margin-top:12px">
-                <button class="btn primary" id="btnRegistrar" type="button">Registrar</button>
+                <button class="btn primary" id="btnGuardarInscripcion" type="button">Guardar selección</button>
                 <a class="btn ghost" id="btnWhatsapp" href="#" target="_blank" rel="noopener">Enviar WhatsApp</a>
               </div>
 
-              <p class="hint">💡 Desde el celu es más simple: registrás y mandás WhatsApp. Luego vos confirmás.</p>
+              <p class="hint">💡 Guardar selección ayuda a armar el mensaje de WhatsApp con tus datos.</p>
             </div>
 
             <div class="card">
               <h3 style="margin:0 0 8px">Horarios por sede</h3>
+
               <div class="card" style="background:rgba(0,0,0,.14)">
                 <strong>Río Cuarto (Mar, Mié, Jue)</strong>
                 <div class="small">Mañana: 08:30–10:00 • 10:00–11:30</div>
@@ -521,9 +522,6 @@
                 <div class="small">Niños: 15:00–16:30 o 18:30–20:00</div>
                 <div class="small">Adultos: 16:30–18:30</div>
               </div>
-
-              <div class="hr"></div>
-              <p class="hint">✅ En la próxima etapa lo conectamos a Firebase para que cupos/altas/bajas sean globales.</p>
             </div>
           </div>
         </div>
@@ -533,7 +531,7 @@
           <div class="title">
             <div>
               <h2>Galería de Arte MC</h2>
-              <p>Subí obras por sede. También tenés “Destacados 2025”. (Guardado local por ahora.)</p>
+              <p>Subí obras por sede (guardado local por ahora).</p>
             </div>
             <span class="badge">Expo por zonas</span>
           </div>
@@ -558,50 +556,32 @@
                 <button class="btn primary" id="btnAgregarObra" type="button">Agregar a Galería</button>
                 <button class="btn danger" id="btnLimpiarGaleria" type="button">Limpiar (este dispositivo)</button>
               </div>
-
-              <p class="hint">📌 Por ahora se guarda en este navegador. Para 200 alumnos: Firebase.</p>
+              <p class="hint">Para 200 alumnos y que quede online para todos: Firebase.</p>
             </div>
 
             <div class="card">
-              <h3 style="margin:0 0 8px">Destacados 2025 (5 lugares)</h3>
-              <div class="row">
-                <input id="destFile1" type="file" accept="image/*"/>
-                <input id="destFile2" type="file" accept="image/*"/>
-                <input id="destFile3" type="file" accept="image/*"/>
-                <input id="destFile4" type="file" accept="image/*"/>
-                <input id="destFile5" type="file" accept="image/*"/>
+              <h3 style="margin:0 0 8px">Conteo</h3>
+              <div class="row" style="margin-bottom:10px">
+                <span class="badge" id="countRC">Río Cuarto: 0</span>
+                <span class="badge" id="countLV">Las Vertientes: 0</span>
+                <span class="badge" id="countAG">Alcira Gigena: 0</span>
               </div>
-              <div class="row" style="margin-top:10px">
-                <button class="btn primary" id="btnGuardarDest" type="button">Guardar Destacados</button>
-                <button class="btn ghost" id="btnVerDest" type="button">Ver abajo</button>
-              </div>
-              <p class="hint">💚 Esto es para tu expo anual: “Alumnos destacados 2025”.</p>
+              <p class="hint">Las obras se guardan en el navegador donde se suben.</p>
             </div>
           </div>
 
           <div class="hr"></div>
-
-          <h3 style="margin:0 0 10px">Obras por sede</h3>
-          <div class="row" style="margin-bottom:10px">
-            <span class="badge" id="countRC">Río Cuarto: 0</span>
-            <span class="badge" id="countLV">Las Vertientes: 0</span>
-            <span class="badge" id="countAG">Alcira Gigena: 0</span>
-          </div>
           <div id="galeriaGrid" class="gallery"></div>
-
-          <div class="hr"></div>
-          <h3 style="margin:0 0 10px">Destacados 2025</h3>
-          <div id="destacadosGrid" class="gallery"></div>
         </div>
 
-        <!-- LAPICINI -->
+        <!-- LAPICINI (PAYWALL) -->
         <div class="section" id="lapicini">
           <div class="title">
             <div>
               <h2>Mundo Lapicini</h2>
-              <p>Historia, capítulo 1 (link) y adelantos del capítulo 2. Tienda con productos.</p>
+              <p>Capítulo 1: requiere acceso habilitado (pago confirmado).</p>
             </div>
-            <span class="badge">Luz • Dibujo • Sanidad</span>
+            <span class="badge" id="badgeAcceso">Acceso: ...</span>
           </div>
 
           <div class="grid">
@@ -613,18 +593,24 @@
               </p>
 
               <div class="hr"></div>
-              <h3 style="margin:0 0 8px">Capítulo 1 (YouTube)</h3>
-              <a class="btn primary" href="https://youtu.be/4NryFERyUlk" target="_blank" rel="noopener">Ver Capítulo 1</a>
+              <h3 style="margin:0 0 8px">Desbloqueo (pago)</h3>
+              <p class="small">Para ver el Capítulo 1, pedí el desbloqueo por WhatsApp. Maxi te habilita el acceso.</p>
+              <a class="btn primary" id="btnWAUnlock" href="#" target="_blank" rel="noopener">Desbloquear por WhatsApp</a>
 
+              <p class="hint">Si ya pagaste, Maxi lo habilita desde el Panel Admin (solo profe).</p>
+            </div>
+
+            <div class="card" id="cap1Locked">
+              <h3 style="margin:0 0 8px">Capítulo 1 (Bloqueado)</h3>
+              <p class="small">🔒 Este contenido se habilita cuando tu acceso esté confirmado.</p>
               <div class="hr"></div>
-              <h3 style="margin:0 0 8px">Canción del cortometraje</h3>
               <a class="btn ghost" href="https://youtu.be/IJ14qcU9R-8?feature=shared" target="_blank" rel="noopener">
-                Lapicini - Dibuja un Árbol (YouTube)
+                Canción: Lapicini - Dibuja un Árbol
               </a>
             </div>
 
-            <div class="card">
-              <h3 style="margin:0 0 8px">Vista rápida (embed)</h3>
+            <div class="card" id="cap1Open" style="display:none">
+              <h3 style="margin:0 0 8px">Capítulo 1 (Habilitado)</h3>
               <div class="video">
                 <iframe
                   src="https://www.youtube.com/embed/4NryFERyUlk"
@@ -632,56 +618,8 @@
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   allowfullscreen></iframe>
               </div>
-              <p class="hint">Si querés que sea pago real con usuario habilitado, lo hacemos con Firebase + links privados.</p>
-            </div>
-          </div>
-
-          <div class="hr"></div>
-
-          <div class="title">
-            <div>
-              <h2>Tienda Lapicini</h2>
-              <p>Subí fotos para generar deseo de compra (remeras, tazas, juguetes, libros, lápices y accesorios).</p>
-            </div>
-            <span class="badge">Productos</span>
-          </div>
-
-          <div class="grid">
-            <div class="card">
-              <h3 style="margin:0 0 8px">Subir productos (solo vos)</h3>
-              <p class="hint">Por ahora es local. Luego lo conectamos y queda online para todos.</p>
-
-              <label>Tipo</label>
-              <select id="prodTipo">
-                <option>Remera (diseño 1)</option>
-                <option>Remera (diseño 2)</option>
-                <option>Remera (diseño 3)</option>
-                <option>Taza (diseño 1)</option>
-                <option>Taza (diseño 2)</option>
-                <option>Taza (diseño 3)</option>
-                <option>Juguete / colección</option>
-                <option>Lápices / accesorios</option>
-                <option>Libro desafío Lapicini</option>
-              </select>
-
-              <label>Foto del producto</label>
-              <input id="prodFile" type="file" accept="image/*"/>
-
-              <label>Detalle (opcional)</label>
-              <input id="prodDesc" placeholder="Ej: Edición limitada, talles, precio, etc."/>
-
-              <div class="row" style="margin-top:12px">
-                <button class="btn primary" id="btnAgregarProd" type="button">Agregar producto</button>
-                <a class="btn ghost" id="btnWhatsappCompra" href="#" target="_blank" rel="noopener">Comprar por WhatsApp</a>
-              </div>
-            </div>
-
-            <div class="card">
-              <h3 style="margin:0 0 8px">Productos cargados</h3>
-              <div id="prodGrid" class="gallery"></div>
-              <div class="row" style="margin-top:10px">
-                <button class="btn danger" id="btnLimpiarProd" type="button">Limpiar tienda (este dispositivo)</button>
-              </div>
+              <div class="hr"></div>
+              <a class="btn primary" href="https://youtu.be/4NryFERyUlk" target="_blank" rel="noopener">Abrir en YouTube</a>
             </div>
           </div>
         </div>
@@ -704,9 +642,7 @@
                 Hoy, con 17 años de experiencia en dibujo realista y 9 años como profesor, impulsa una comunidad artística para niños,
                 adolescentes y adultos, sin necesidad de conocimientos previos.
               </p>
-
               <div class="hr"></div>
-
               <h3 style="margin:0 0 8px">Redes</h3>
               <div class="row">
                 <a class="btn ghost" href="https://www.instagram.com/maxicortez.dibujos?igsh=ZHh2YXVsdzdxa2sy" target="_blank" rel="noopener">Instagram personal</a>
@@ -723,7 +659,6 @@
               <p class="small">📩 Email: <a href="mailto:maurocortez17@gmail.com" style="color:var(--accent)">maurocortez17@gmail.com</a></p>
               <p class="small">📲 WhatsApp: <span style="color:var(--accent)">+54 358 4361289</span></p>
               <a class="btn primary" id="btnWhatsappSobre" href="#" target="_blank" rel="noopener">Hablar por WhatsApp</a>
-              <p class="hint">Si querés, agregamos un formulario que te llegue a WhatsApp automáticamente con todos los datos.</p>
             </div>
           </div>
         </div>
@@ -733,32 +668,33 @@
           <div class="title">
             <div>
               <h2>Panel Admin MC</h2>
-              <p>Gestión básica (local): ver registrados, eliminar y liberar “cupo” local. Luego lo llevamos a Firebase.</p>
+              <p>Solo profesor. Activá “Pago Lapicini” para desbloquear el Capítulo 1 a cada usuario (local).</p>
             </div>
             <span class="badge">Admin: maurocortez17@gmail.com</span>
           </div>
 
           <div class="card">
-            <h3 style="margin:0 0 8px">Alumnos registrados (este dispositivo)</h3>
+            <h3 style="margin:0 0 8px">Usuarios registrados (este dispositivo)</h3>
             <div class="row" style="margin-bottom:10px">
               <button class="btn ghost" id="btnRefrescarAdmin" type="button">Refrescar</button>
-              <button class="btn danger" id="btnLimpiarAlumnos" type="button">Borrar todos (este dispositivo)</button>
+              <button class="btn danger" id="btnLimpiarUsers" type="button">Borrar todos (este dispositivo)</button>
             </div>
+
             <div style="overflow:auto">
               <table>
                 <thead>
                   <tr>
                     <th>Nombre</th>
                     <th>Email</th>
-                    <th>Sede</th>
-                    <th>Horario</th>
+                    <th>Pago Lapicini</th>
                     <th>Acción</th>
                   </tr>
                 </thead>
                 <tbody id="adminBody"></tbody>
               </table>
             </div>
-            <p class="hint">📌 Para eliminar alumnos “reales” y liberar cupos para todos: Firebase + panel real.</p>
+
+            <p class="hint">Para que sea real y funcione con TODOS los alumnos desde cualquier celular: Firebase.</p>
           </div>
         </div>
       </section>
@@ -770,9 +706,10 @@
   </div>
 
   <script>
-    // ======= CONFIG GENERAL =======
+    // ======= CONFIG =======
     const WHATSAPP = "5493584361289";
-    const EMAIL_ADMIN = "maurocortez17@gmail.com";
+    const ADMIN_EMAIL = "maurocortez17@gmail.com";
+    const CAP1_YT = "https://youtu.be/4NryFERyUlk";
 
     const horariosPorZona = {
       "Río Cuarto": [
@@ -795,25 +732,14 @@
     };
 
     // ======= HELPERS =======
-    const $ = (id) => document.getElementById(id);
-
-    function waLink(text){
-      return `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(text)}`;
-    }
-
-    function toast(msg){
-      alert(msg);
-    }
-
+    const $ = (id)=>document.getElementById(id);
+    function waLink(text){ return `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(text)}`; }
+    function toast(msg){ alert(msg); }
     function readLS(key, fallback){
-      try{
-        const v = localStorage.getItem(key);
-        return v ? JSON.parse(v) : fallback;
-      }catch(e){ return fallback; }
+      try{ const v = localStorage.getItem(key); return v ? JSON.parse(v) : fallback; }
+      catch(e){ return fallback; }
     }
-    function saveLS(key, value){
-      localStorage.setItem(key, JSON.stringify(value));
-    }
+    function saveLS(key, value){ localStorage.setItem(key, JSON.stringify(value)); }
 
     function fileToDataURL(file){
       return new Promise((resolve, reject)=>{
@@ -823,6 +749,101 @@
         fr.readAsDataURL(file);
       });
     }
+
+    // ======= AUTH (LOCAL) =======
+    // users: [{id,nombre,email,pass, paidLapicini:boolean}]
+    function getUsers(){ return readLS("mc_users", []); }
+    function setUsers(arr){ saveLS("mc_users", arr); }
+
+    // session: {email}
+    function getSession(){ return readLS("mc_session", null); }
+    function setSession(s){ saveLS("mc_session", s); }
+    function clearSession(){ localStorage.removeItem("mc_session"); }
+
+    function getCurrentUser(){
+      const sess = getSession();
+      if(!sess?.email) return null;
+      return getUsers().find(u => u.email === sess.email) || null;
+    }
+
+    function isAdmin(){
+      const u = getCurrentUser();
+      return !!u && u.email === ADMIN_EMAIL;
+    }
+
+    // ======= GATE UI =======
+    const gate = $("gate");
+    const loginBox = $("loginBox");
+    const registerBox = $("registerBox");
+    const btnSwitchGate = $("btnSwitchGate");
+    const btnBackLogin = $("btnBackLogin");
+
+    function showGate(){
+      gate.classList.add("show");
+      document.body.style.overflow = "hidden";
+    }
+    function hideGate(){
+      gate.classList.remove("show");
+      document.body.style.overflow = "";
+    }
+
+    btnSwitchGate.addEventListener("click", ()=>{
+      loginBox.style.display = "none";
+      registerBox.style.display = "block";
+    });
+    btnBackLogin.addEventListener("click", ()=>{
+      registerBox.style.display = "none";
+      loginBox.style.display = "block";
+    });
+
+    $("btnResetLocal").addEventListener("click", ()=>{
+      clearSession();
+      toast("Sesión borrada.");
+      location.reload();
+    });
+
+    $("btnRegister").addEventListener("click", ()=>{
+      const nombre = $("regNombre").value.trim();
+      const email = $("regEmail").value.trim().toLowerCase();
+      const pass  = $("regPass").value;
+
+      if(!nombre || !email || !pass){
+        toast("Completá nombre, email y contraseña.");
+        return;
+      }
+
+      const users = getUsers();
+      if(users.some(u=>u.email===email)){
+        toast("Ese email ya existe. Probá iniciar sesión.");
+        return;
+      }
+
+      users.push({
+        id: crypto.randomUUID(),
+        nombre, email, pass,
+        paidLapicini: (email === ADMIN_EMAIL) // admin entra con acceso por defecto
+      });
+      setUsers(users);
+      setSession({ email });
+
+      toast("✅ Cuenta creada. Entrando...");
+      location.reload();
+    });
+
+    $("btnLogin").addEventListener("click", ()=>{
+      const email = $("loginEmail").value.trim().toLowerCase();
+      const pass  = $("loginPass").value;
+
+      const user = getUsers().find(u=>u.email===email && u.pass===pass);
+      if(!user){
+        toast("Email o contraseña incorrectos.");
+        return;
+      }
+
+      setSession({ email });
+      toast("✅ Bienvenido/a.");
+      location.reload();
+    });
 
     // ======= TABS =======
     const tabButtons = document.querySelectorAll(".tab-btn");
@@ -853,96 +874,83 @@
         horarioSel.appendChild(opt);
       });
     }
-
     zonaSel.addEventListener("change", cargarHorarios);
-
-    // Carga inicial (para que no quede vacío)
     cargarHorarios();
 
-    // ======= INSCRIPCION: REGISTRO LOCAL =======
-    function getAlumnos(){
-      return readLS("mc_alumnos", []);
-    }
-    function setAlumnos(arr){
-      saveLS("mc_alumnos", arr);
-    }
+    // guardar selección por usuario (local)
+    function getInscripciones(){ return readLS("mc_inscripciones", {}); } // {email:{nombre,email,zona,horario}}
+    function setInscripciones(obj){ saveLS("mc_inscripciones", obj); }
 
-    $("btnRegistrar").addEventListener("click", ()=>{
+    $("btnGuardarInscripcion").addEventListener("click", ()=>{
+      const u = getCurrentUser();
+      if(!u){ toast("Primero ingresá."); return; }
+
       const nombre = $("inNombre").value.trim();
       const email = $("inEmail").value.trim().toLowerCase();
-      const pass  = $("inPass").value;
-      const zona  = zonaSel.value;
-      const horario = horarioSel.value;
-
-      if(!nombre || !email || !pass || !zona || !horario){
-        toast("Completa nombre, email, contraseña, zona y horario.");
-        return;
-      }
-
-      const alumnos = getAlumnos();
-      if(alumnos.some(a=>a.email === email)){
-        toast("Ese email ya está registrado en este dispositivo. (Luego lo haremos global con Firebase)");
-        return;
-      }
-
-      alumnos.push({
-        id: crypto.randomUUID(),
-        nombre, email, zona, horario,
-        createdAt: new Date().toISOString()
-      });
-      setAlumnos(alumnos);
-
-      toast("✅ Registrado (local). Ahora enviá WhatsApp para confirmar inscripción/pago.");
-      refreshAdmin();
-    });
-
-    function buildWhatsappText(){
-      const nombre = $("inNombre").value.trim();
-      const email = $("inEmail").value.trim();
       const zona = zonaSel.value;
       const horario = horarioSel.value;
 
+      if(!nombre || !email || !zona || !horario){
+        toast("Completá nombre, email, zona y horario.");
+        return;
+      }
+
+      const all = getInscripciones();
+      all[u.email] = { nombre, email, zona, horario, updatedAt: new Date().toISOString() };
+      setInscripciones(all);
+      toast("✅ Guardado. Ahora podés enviar WhatsApp.");
+      updateWhatsappButtons();
+    });
+
+    function buildWhatsappText(){
+      const u = getCurrentUser();
+      const all = getInscripciones();
+      const data = (u && all[u.email]) ? all[u.email] : null;
+
+      const nombre = data?.nombre || $("inNombre").value.trim() || "-";
+      const email = data?.email || $("inEmail").value.trim() || (u?.email || "-");
+      const zona = data?.zona || zonaSel.value || "-";
+      const horario = data?.horario || horarioSel.value || "-";
+
       return `Hola Maxi! Quiero inscribirme en Academia de Arte MC.
-Nombre: ${nombre || "-"}
-Email: ${email || "-"}
-Sede: ${zona || "-"}
-Horario: ${horario || "-"}
+Nombre: ${nombre}
+Email: ${email}
+Sede: ${zona}
+Horario: ${horario}
 Quiero confirmar inscripción y pago.`;
     }
 
     function updateWhatsappButtons(){
       const text = buildWhatsappText();
       $("btnWhatsapp").href = waLink(text);
-      $("btnWhatsappHeader").href = waLink(text);
+      $("btnWhatsappHeader").href = waLink("Hola Maxi! Quiero información de inscripción en Academia de Arte MC.");
       $("btnWhatsappSobre").href = waLink("Hola Maxi! Quiero información para inscribirme en Academia de Arte MC.");
-      $("btnWhatsappCompra").href = waLink("Hola Maxi! Quiero comprar productos de Lapicini (remera/taza/libro/accesorios).");
     }
     ["input","change"].forEach(ev=>{
-      ["inNombre","inEmail","inPass","inZona","inHorario"].forEach(id=>{
+      ["inNombre","inEmail","inZona","inHorario"].forEach(id=>{
         $(id).addEventListener(ev, updateWhatsappButtons);
       });
     });
-    updateWhatsappButtons();
 
     // ======= GALERIA (LOCAL) =======
     function getObras(){ return readLS("mc_obras", []); }
     function setObras(arr){ saveLS("mc_obras", arr); }
 
     $("btnAgregarObra").addEventListener("click", async ()=>{
+      const u = getCurrentUser();
+      if(!u){ toast("Primero ingresá."); return; }
+
       const zona = $("galZona").value;
       const autor = $("galAutor").value.trim();
       const file = $("galFile").files?.[0];
 
-      if(!file){
-        toast("Elegí una imagen para subir.");
-        return;
-      }
+      if(!file){ toast("Elegí una imagen para subir."); return; }
 
       const dataUrl = await fileToDataURL(file);
       const obras = getObras();
       obras.push({
         id: crypto.randomUUID(),
-        zona, autor,
+        zona, autor: autor || u.nombre,
         img: dataUrl,
         createdAt: new Date().toISOString()
       });
@@ -965,7 +973,6 @@ Quiero confirmar inscripción y pago.`;
       const grid = $("galeriaGrid");
       grid.innerHTML = "";
 
-      // contadores
       const cRC = obras.filter(o=>o.zona==="Río Cuarto").length;
       const cLV = obras.filter(o=>o.zona==="Las Vertientes").length;
       const cAG = obras.filter(o=>o.zona==="Alcira Gigena").length;
@@ -978,7 +985,6 @@ Quiero confirmar inscripción y pago.`;
         return;
       }
 
-      // ordenar por fecha desc
       obras.slice().reverse().forEach(o=>{
         const el = document.createElement("div");
         el.className = "thumb";
@@ -991,150 +997,132 @@ Quiero confirmar inscripción y pago.`;
       });
     }
 
-    // ======= DESTACADOS 2025 (LOCAL) =======
-    function getDest(){ return readLS("mc_dest2025", []); }
-    function setDest(arr){ saveLS("mc_dest2025", arr); }
+    // ======= LAPICINI PAYWALL =======
+    function updateLapiciniAccessUI(){
+      const u = getCurrentUser();
+      const paid = !!u?.paidLapicini;
 
-    $("btnGuardarDest").addEventListener("click", async ()=>{
-      const files = [1,2,3,4,5].map(n => $("destFile"+n).files?.[0]).filter(Boolean);
-      if(files.length === 0){
-        toast("Subí al menos 1 imagen en Destacados 2025.");
-        return;
-      }
-      const imgs = [];
-      for(const f of files){
-        imgs.push(await fileToDataURL(f));
-      }
-      setDest(imgs);
-      [1,2,3,4,5].forEach(n => $("destFile"+n).value = "");
-      renderDest();
-      toast("✅ Destacados 2025 guardados (local).");
-    });
+      $("badgeAcceso").textContent = paid ? "Acceso: HABILITADO ✅" : "Acceso: BLOQUEADO 🔒";
+      $("cap1Locked").style.display = paid ? "none" : "block";
+      $("cap1Open").style.display = paid ? "block" : "none";
 
-    $("btnVerDest").addEventListener("click", renderDest);
-
-    function renderDest(){
-      const imgs = getDest();
-      const grid = $("destacadosGrid");
-      grid.innerHTML = "";
-      if(imgs.length === 0){
-        grid.innerHTML = `<div class="card" style="grid-column:1/-1">Todavía no cargaste destacados 2025 en este dispositivo.</div>`;
-        return;
-      }
-      imgs.forEach((src, i)=>{
-        const el = document.createElement("div");
-        el.className = "thumb";
-        el.innerHTML = `
-          <div class="tag">Destacado ${i+1}</div>
-          <img src="${src}" alt="Destacado">
-          <div class="cap">Alumnos destacados 2025</div>
-        `;
-        grid.appendChild(el);
-      });
+      const msg = `Hola Maxi! Quiero desbloquear el Capítulo 1 de Lapicini.
+Mi email de registro es: ${u?.email || "-"}
+Quiero el link de pago y habilitación.`;
+      $("btnWAUnlock").href = waLink(msg);
     }
 
-    // ======= TIENDA (LOCAL) =======
-    function getProd(){ return readLS("mc_productos", []); }
-    function setProd(arr){ saveLS("mc_productos", arr); }
-
-    $("btnAgregarProd").addEventListener("click", async ()=>{
-      const tipo = $("prodTipo").value;
-      const desc = $("prodDesc").value.trim();
-      const file = $("prodFile").files?.[0];
-
-      if(!file){
-        toast("Elegí una imagen del producto.");
-        return;
-      }
-      const img = await fileToDataURL(file);
-      const items = getProd();
-      items.push({ id: crypto.randomUUID(), tipo, desc, img, createdAt: new Date().toISOString() });
-      setProd(items);
-
-      $("prodFile").value = "";
-      $("prodDesc").value = "";
-      renderProd();
-      toast("✅ Producto agregado (local).");
-    });
-
-    $("btnLimpiarProd").addEventListener("click", ()=>{
-      if(confirm("¿Borrar la tienda guardada en este dispositivo?")){
-        localStorage.removeItem("mc_productos");
-        renderProd();
-      }
-    });
-
-    function renderProd(){
-      const items = getProd();
-      const grid = $("prodGrid");
-      grid.innerHTML = "";
-      if(items.length === 0){
-        grid.innerHTML = `<div class="card" style="grid-column:1/-1">Todavía no hay productos cargados en este dispositivo.</div>`;
-        return;
-      }
-      items.slice().reverse().forEach(p=>{
-        const el = document.createElement("div");
-        el.className = "thumb";
-        el.innerHTML = `
-          <div class="tag">${p.tipo}</div>
-          <img src="${p.img}" alt="Producto">
-          <div class="cap">${p.desc ? p.desc : "Producto Lapicini"}</div>
-        `;
-        grid.appendChild(el);
-      });
-    }
-
-    // ======= ADMIN (LOCAL) =======
+    // ======= ADMIN PANEL =======
     const adminBody = $("adminBody");
 
     function refreshAdmin(){
-      const alumnos = getAlumnos();
       adminBody.innerHTML = "";
-
-      if(alumnos.length === 0){
-        adminBody.innerHTML = `<tr><td colspan="5" class="small">No hay alumnos registrados en este dispositivo.</td></tr>`;
+      if(!isAdmin()){
+        adminBody.innerHTML = `<tr><td colspan="4" class="small">Acceso denegado. Solo profesor.</td></tr>`;
         return;
       }
 
-      alumnos.slice().reverse().forEach(a=>{
+      const users = getUsers();
+      if(users.length === 0){
+        adminBody.innerHTML = `<tr><td colspan="4" class="small">No hay usuarios en este dispositivo.</td></tr>`;
+        return;
+      }
+
+      users.slice().reverse().forEach(u=>{
         const tr = document.createElement("tr");
         tr.innerHTML = `
-          <td>${a.nombre}</td>
-          <td>${a.email}</td>
-          <td>${a.zona}</td>
-          <td>${a.horario}</td>
-          <td>
-            <button class="btn danger" data-del="${a.id}" type="button">Eliminar</button>
+          <td>${u.nombre}</td>
+          <td>${u.email}</td>
+          <td><span class="badge">${u.paidLapicini ? "Sí ✅" : "No 🔒"}</span></td>
+          <td class="row" style="gap:8px">
+            <button class="btn ghost" data-toggle="${u.email}" type="button">Toggle Pago</button>
+            <button class="btn danger" data-del="${u.email}" type="button">Eliminar</button>
           </td>
         `;
         adminBody.appendChild(tr);
       });
 
+      adminBody.querySelectorAll("button[data-toggle]").forEach(btn=>{
+        btn.addEventListener("click", ()=>{
+          const email = btn.getAttribute("data-toggle");
+          const users = getUsers();
+          const idx = users.findIndex(x=>x.email===email);
+          if(idx>=0){
+            users[idx].paidLapicini = !users[idx].paidLapicini;
+            setUsers(users);
+            refreshAdmin();
+            updateLapiciniAccessUI();
+          }
+        });
+      });
+
       adminBody.querySelectorAll("button[data-del]").forEach(btn=>{
         btn.addEventListener("click", ()=>{
-          const id = btn.getAttribute("data-del");
-          const alumnos2 = getAlumnos().filter(x=>x.id !== id);
-          setAlumnos(alumnos2);
+          const email = btn.getAttribute("data-del");
+          if(!confirm("¿Eliminar usuario?")) return;
+          const users = getUsers().filter(x=>x.email!==email);
+          setUsers(users);
+          // si borró el usuario logueado, cerrar sesión
+          const sess = getSession();
+          if(sess?.email === email){ clearSession(); }
           refreshAdmin();
+          updateLapiciniAccessUI();
         });
       });
     }
 
     $("btnRefrescarAdmin").addEventListener("click", refreshAdmin);
-
-    $("btnLimpiarAlumnos").addEventListener("click", ()=>{
-      if(confirm("¿Borrar TODOS los alumnos guardados en este dispositivo?")){
-        localStorage.removeItem("mc_alumnos");
+    $("btnLimpiarUsers").addEventListener("click", ()=>{
+      if(!isAdmin()){ toast("Solo profesor."); return; }
+      if(confirm("¿Borrar TODOS los usuarios de este dispositivo?")){
+        localStorage.removeItem("mc_users");
+        localStorage.removeItem("mc_session");
         refreshAdmin();
+        toast("Listo. Se borró el registro local.");
+        location.reload();
       }
+    });
+
+    // ocultar tab admin a alumnos
+    function enforceAdminVisibility(){
+      const adminTab = $("tabAdmin");
+      if(isAdmin()){
+        adminTab.style.display = "flex";
+      }else{
+        adminTab.style.display = "none";
+      }
+    }
+
+    // ======= LOGOUT =======
+    $("btnLogout").addEventListener("click", ()=>{
+      clearSession();
+      toast("Sesión cerrada.");
+      location.reload();
     });
 
     // ======= INIT =======
     $("year").textContent = new Date().getFullYear();
+
+    // Si no hay sesión, bloquear todo con gate
+    const current = getCurrentUser();
+    if(!current){
+      showGate();
+    }else{
+      hideGate();
+      $("userLine").textContent = `Sesión: ${current.nombre} • ${current.email}`;
+    }
+
+    // cargar inputs con datos del user
+    if(current){
+      $("inNombre").value = current.nombre || "";
+      $("inEmail").value = current.email || "";
+    }
+
+    updateWhatsappButtons();
     renderGaleria();
-    renderDest();
-    renderProd();
+    enforceAdminVisibility();
     refreshAdmin();
+    updateLapiciniAccessUI();
   </script>
 </body>
 </html>
