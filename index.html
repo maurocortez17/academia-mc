@@ -859,6 +859,135 @@
     };
 
     const app = initializeApp(firebaseConfig);
+    /* =========================
+   FIREBASE (Auth + Firestore)
+   Pegar después de: const app = initializeApp(firebaseConfig);
+========================= */
+
+// ✅ IMPORTS (si ya existen, NO los repitas)
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
+
+import {
+  getFirestore,
+  doc,
+  setDoc,
+  getDoc,
+  updateDoc,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
+
+// ✅ Inicializar servicios
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+// ✅ Tu email será ADMIN (podés agregar más después)
+const ADMIN_EMAILS = new Set(["maurocortez17@gmail.com"]);
+
+// ✅ Helpers
+function monthKey(date = new Date()) {
+  const y = date.getFullYear();
+  const m = String(date.getMonth() + 1).padStart(2, "0");
+  return `${y}-${m}`; // ej: 2026-03
+}
+
+// Crea/actualiza el perfil del usuario en /usuarios/{uid}
+async function ensureUserProfile(user, extra = {}) {
+  const ref = doc(db, "usuarios", user.uid);
+  const snap = await getDoc(ref);
+
+  const role = ADMIN_EMAILS.has((user.email || "").toLowerCase()) ? "admin" : "alumno";
+
+  if (!snap.exists()) {
+    await setDoc(ref, {
+      uid: user.uid,
+      nombre: extra.nombre || user.displayName || "",
+      email: user.email || "",
+      role,
+      zona: extra.zona || "",
+      horario: extra.horario || "",
+      createdAt: serverTimestamp(),
+      updatedAt: serverTimestamp(),
+      lapiciniAccess: role === "admin", // admin entra siempre
+      pagos: {} // se llena mes a mes
+    });
+  } else {
+    // si ya existe, solo refrescamos role/updatedAt
+    await updateDoc(ref, {
+      role,
+      updatedAt: serverTimestamp()
+    });
+  }
+
+  return role;
+}
+
+// ✅ Registrar usuario (Email/Pass)
+async function fbRegister({ nombre, email, password, zona, horario }) {
+  const cred = await createUserWithEmailAndPassword(auth, email, password);
+  await ensureUserProfile(cred.user, { nombre, zona, horario });
+  return cred.user;
+}
+
+// ✅ Login
+async function fbLogin({ email, password }) {
+  const cred = await signInWithEmailAndPassword(auth, email, password);
+  const role = await ensureUserProfile(cred.user);
+  return { user: cred.user, role };
+}
+
+// ✅ Logout
+async function fbLogout() {
+  await signOut(auth);
+}
+
+// ✅ Marcar pago (admin o el propio usuario si permitís)
+async function setPago(uid, ym /* "2026-03" */, status /* "pago"|"deuda" */, method = "manual") {
+  const ref = doc(db, "usuarios", uid);
+  const payload = {};
+  payload[`pagos.${ym}`] = {
+    status,
+    method,
+    at: serverTimestamp()
+  };
+  await updateDoc(ref, payload);
+}
+
+// ✅ Habilitar acceso Lapicini (admin)
+async function setLapiciniAccess(uid, enabled) {
+  const ref = doc(db, "usuarios", uid);
+  await updateDoc(ref, { lapiciniAccess: !!enabled, updatedAt: serverTimestamp() });
+}
+
+// ✅ Estado de sesión (acá conectamos tu UI)
+onAuthStateChanged(auth, async (user) => {
+  if (!user) {
+    // 🔻 NO logueado: mostrás pantalla login/registro
+    // (conectalo a tu UI existente)
+    if (typeof showAuthScreen === "function") showAuthScreen();
+    return;
+  }
+
+  const role = await ensureUserProfile(user);
+
+  // 🔺 Logueado: mostrás el menú y secciones
+  if (typeof showAppScreen === "function") showAppScreen();
+
+  // 🔐 Panel admin visible solo si es admin
+  if (typeof enforceAdminVisibility === "function") {
+    enforceAdminVisibility(role === "admin");
+  }
+
+  // 📌 Si querés: marcar “mes actual”
+  const ym = monthKey(new Date());
+  // (opcional: si no existe, no hacemos nada; solo lo usamos para mostrar)
+});
+
     const auth = getAuth(app);
     const db = getFirestore(app);
 
@@ -1302,3 +1431,4 @@ Quiero el link de pago y habilitación.`;
   </script>
 </body>
 </html>
+
