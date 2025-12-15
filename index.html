@@ -786,7 +786,7 @@
           <div class="title">
             <div>
               <h2>Panel Admin MC</h2>
-              <p>Solo profesor. Activá “Pago Lapicini” para desbloquear Capítulo 1 (ahora es GLOBAL con Firestore).</p>
+              <p>Solo profesor. Activá “Pago Lapicini” para desbloquear Capítulo 1 (Firestore).</p>
             </div>
             <span class="badge">Admin: maurocortez17@gmail.com</span>
           </div>
@@ -811,7 +811,7 @@
               </table>
             </div>
 
-            <p class="hint">Próximo paso: pagos mensuales (Marzo/Abril/etc) y cupos por turno.</p>
+            <p class="hint">Próximo paso: pagos mensuales y cupos por turno.</p>
           </div>
         </div>
       </section>
@@ -859,135 +859,6 @@
     };
 
     const app = initializeApp(firebaseConfig);
-    /* =========================
-   FIREBASE (Auth + Firestore)
-   Pegar después de: const app = initializeApp(firebaseConfig);
-========================= */
-
-// ✅ IMPORTS (si ya existen, NO los repitas)
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  signOut,
-  onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
-
-import {
-  getFirestore,
-  doc,
-  setDoc,
-  getDoc,
-  updateDoc,
-  serverTimestamp
-} from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
-
-// ✅ Inicializar servicios
-const auth = getAuth(app);
-const db = getFirestore(app);
-
-// ✅ Tu email será ADMIN (podés agregar más después)
-const ADMIN_EMAILS = new Set(["maurocortez17@gmail.com"]);
-
-// ✅ Helpers
-function monthKey(date = new Date()) {
-  const y = date.getFullYear();
-  const m = String(date.getMonth() + 1).padStart(2, "0");
-  return `${y}-${m}`; // ej: 2026-03
-}
-
-// Crea/actualiza el perfil del usuario en /usuarios/{uid}
-async function ensureUserProfile(user, extra = {}) {
-  const ref = doc(db, "usuarios", user.uid);
-  const snap = await getDoc(ref);
-
-  const role = ADMIN_EMAILS.has((user.email || "").toLowerCase()) ? "admin" : "alumno";
-
-  if (!snap.exists()) {
-    await setDoc(ref, {
-      uid: user.uid,
-      nombre: extra.nombre || user.displayName || "",
-      email: user.email || "",
-      role,
-      zona: extra.zona || "",
-      horario: extra.horario || "",
-      createdAt: serverTimestamp(),
-      updatedAt: serverTimestamp(),
-      lapiciniAccess: role === "admin", // admin entra siempre
-      pagos: {} // se llena mes a mes
-    });
-  } else {
-    // si ya existe, solo refrescamos role/updatedAt
-    await updateDoc(ref, {
-      role,
-      updatedAt: serverTimestamp()
-    });
-  }
-
-  return role;
-}
-
-// ✅ Registrar usuario (Email/Pass)
-async function fbRegister({ nombre, email, password, zona, horario }) {
-  const cred = await createUserWithEmailAndPassword(auth, email, password);
-  await ensureUserProfile(cred.user, { nombre, zona, horario });
-  return cred.user;
-}
-
-// ✅ Login
-async function fbLogin({ email, password }) {
-  const cred = await signInWithEmailAndPassword(auth, email, password);
-  const role = await ensureUserProfile(cred.user);
-  return { user: cred.user, role };
-}
-
-// ✅ Logout
-async function fbLogout() {
-  await signOut(auth);
-}
-
-// ✅ Marcar pago (admin o el propio usuario si permitís)
-async function setPago(uid, ym /* "2026-03" */, status /* "pago"|"deuda" */, method = "manual") {
-  const ref = doc(db, "usuarios", uid);
-  const payload = {};
-  payload[`pagos.${ym}`] = {
-    status,
-    method,
-    at: serverTimestamp()
-  };
-  await updateDoc(ref, payload);
-}
-
-// ✅ Habilitar acceso Lapicini (admin)
-async function setLapiciniAccess(uid, enabled) {
-  const ref = doc(db, "usuarios", uid);
-  await updateDoc(ref, { lapiciniAccess: !!enabled, updatedAt: serverTimestamp() });
-}
-
-// ✅ Estado de sesión (acá conectamos tu UI)
-onAuthStateChanged(auth, async (user) => {
-  if (!user) {
-    // 🔻 NO logueado: mostrás pantalla login/registro
-    // (conectalo a tu UI existente)
-    if (typeof showAuthScreen === "function") showAuthScreen();
-    return;
-  }
-
-  const role = await ensureUserProfile(user);
-
-  // 🔺 Logueado: mostrás el menú y secciones
-  if (typeof showAppScreen === "function") showAppScreen();
-
-  // 🔐 Panel admin visible solo si es admin
-  if (typeof enforceAdminVisibility === "function") {
-    enforceAdminVisibility(role === "admin");
-  }
-
-  // 📌 Si querés: marcar “mes actual”
-  const ym = monthKey(new Date());
-  // (opcional: si no existe, no hacemos nada; solo lo usamos para mostrar)
-});
-
     const auth = getAuth(app);
     const db = getFirestore(app);
 
@@ -1022,7 +893,7 @@ onAuthStateChanged(auth, async (user) => {
 
     // ===== Tabs =====
     const tabButtons = document.querySelectorAll(".tab-btn");
-    const sections = document.querySelectorAll(".section");
+    const sections = document.querySelectorAll(".content .section");
     tabButtons.forEach(btn=>{
       btn.addEventListener("click", ()=>{
         tabButtons.forEach(b=>b.classList.remove("active"));
@@ -1067,7 +938,7 @@ onAuthStateChanged(auth, async (user) => {
     zonaSel.addEventListener("change", cargarHorarios);
     cargarHorarios();
 
-    // ===== Local storage helpers (para galería/destacados/tienda por ahora) =====
+    // ===== Local storage helpers (galería/destacados/tienda local) =====
     function readLS(key, fallback){
       try{ const v = localStorage.getItem(key); return v ? JSON.parse(v) : fallback; }
       catch(e){ return fallback; }
@@ -1335,8 +1206,8 @@ Quiero el link de pago y habilitación.`;
         return;
       }
 
-      const q = query(collection(db, "users"), orderBy("createdAt", "desc"));
-      const snap = await getDocs(q);
+      const qy = query(collection(db, "users"), orderBy("createdAt", "desc"));
+      const snap = await getDocs(qy);
       if(snap.empty){
         body.innerHTML = `<tr><td colspan="4" class="small">Todavía no hay usuarios.</td></tr>`;
         return;
@@ -1364,11 +1235,11 @@ Quiero el link de pago y habilitación.`;
           const snap = await getDoc(ref);
           if(!snap.exists()) return;
           const cur = snap.data();
-          await updateDoc(ref, { paidLapicini: !cur.paidLapicini });
+          const next = !cur.paidLapicini;
+          await updateDoc(ref, { paidLapicini: next });
 
-          // Si justo estás viendo tu propio usuario en pantalla, refresca paywall:
           if(auth.currentUser?.uid === uid){
-            updateLapiciniAccessUI(!cur.paidLapicini);
+            updateLapiciniAccessUI(next);
           }
           await refreshAdmin();
         });
@@ -1391,7 +1262,6 @@ Quiero el link de pago y habilitación.`;
       }
       hideGate();
 
-      // Perfil desde Firestore:
       const ref = doc(db, "users", user.uid);
       const snap = await getDoc(ref);
 
@@ -1399,9 +1269,8 @@ Quiero el link de pago y habilitación.`;
       if(snap.exists()){
         profile = snap.data();
       } else {
-        // fallback (por si alguien se registró y no se creó doc por algún error)
-        profile = { nombre: user.displayName || "Alumno/a", email: user.email, paidLapicini: false };
-        await setDoc(ref, { ...profile, createdAt: Date.now() });
+        profile = { nombre: user.displayName || "Alumno/a", email: user.email, paidLapicini: false, createdAt: Date.now() };
+        await setDoc(ref, profile);
       }
 
       $("userLine").textContent = `Sesión: ${profile.nombre} • ${profile.email}`;
@@ -1410,20 +1279,19 @@ Quiero el link de pago y habilitación.`;
 
       const isAdmin = (profile.email === ADMIN_EMAIL);
       enforceAdminVisibility(isAdmin);
-
       updateLapiciniAccessUI(!!profile.paidLapicini);
 
-      // Render local sections:
       renderGaleria();
       renderDestacados();
       renderProducts();
+      updateWhatsappButtons();
 
       if(isAdmin){
         await refreshAdmin();
       }
     });
 
-    // Inicial render local (por si ya hay cosas cargadas):
+    // Inicial render local:
     renderGaleria();
     renderDestacados();
     renderProducts();
@@ -1431,4 +1299,3 @@ Quiero el link de pago y habilitación.`;
   </script>
 </body>
 </html>
-
