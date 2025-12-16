@@ -790,6 +790,34 @@
     </div>
   </div>
 </div>
+        <!-- PAGOS -->
+<div class="section" id="pagos">
+  <div class="title">
+    <div>
+      <h2>Mis Pagos</h2>
+      <p>Acá ves tu estado mensual. Si falta un mes, pedí link o confirmación por WhatsApp.</p>
+    </div>
+    <span class="badge" id="badgePagoHoy">Mes: ...</span>
+  </div>
+
+  <div class="card">
+    <h3 style="margin:0 0 8px">Estado por mes</h3>
+    <div style="overflow:auto">
+      <table>
+        <thead>
+          <tr>
+            <th>Mes</th>
+            <th>Estado</th>
+            <th>Detalle</th>
+          </tr>
+        </thead>
+        <tbody id="payBody"></tbody>
+      </table>
+    </div>
+    <div class="hr"></div>
+    <a class="btn primary" id="btnWAPagos" href="#" target="_blank" rel="noopener">Consultar por WhatsApp</a>
+  </div>
+</div>
 
         <!-- SOBRE -->
         <div class="section" id="sobre">
@@ -1349,4 +1377,5 @@ Quiero el link de pago y habilitación.`;
   </script>
 </body>
 </html>
+
 
