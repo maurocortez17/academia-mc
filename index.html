@@ -1374,8 +1374,74 @@ Quiero el link de pago y habilitación.`;
     renderDestacados();
     renderProducts();
     updateWhatsappButtons();
+
+// ===== PAGOS MENSUALES (CLASES) =====
+function monthKey(date = new Date()){
+  const y = date.getFullYear();
+  const m = String(date.getMonth() + 1).padStart(2, "0");
+  return `${y}-${m}`; // ej: 2025-12
+}
+
+function statusLabel(s){
+  if(s === "pago") return "PAGADO ✅";
+  if(s === "deuda") return "DEBE 🔴";
+  return "SIN REGISTRO ⚪";
+}
+
+async function setPagoMes(uid, ym, status, extra = {}){
+  const ref = doc(db, "users", uid);
+  const payload = {};
+  payload[`pagos.${ym}`] = {
+    status,                      // "pago" | "deuda"
+    amount: extra.amount || "",  // opcional
+    method: extra.method || "manual",
+    note: extra.note || "",
+    at: Date.now()
+  };
+  await updateDoc(ref, payload);
+}
+
+function renderMisPagos(profile){
+  const body = $("payBody");
+  body.innerHTML = "";
+  const pagos = profile.pagos || {};
+  const ahora = new Date();
+  $("badgePagoHoy").textContent = `Mes: ${monthKey(ahora)}`;
+
+  // últimos 8 meses (incluye el actual)
+  const months = [];
+  for(let i=0;i<8;i++){
+    const d = new Date(ahora.getFullYear(), ahora.getMonth()-i, 1);
+    months.push(monthKey(d));
+  }
+
+  months.forEach(ym=>{
+    const info = pagos[ym] || null;
+    const st = info?.status || "";
+    const detail = [
+      info?.amount ? `💲${info.amount}` : "",
+      info?.method ? `(${info.method})` : "",
+      info?.note ? `• ${info.note}` : ""
+    ].filter(Boolean).join(" ");
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${ym}</td>
+      <td><span class="badge">${statusLabel(st)}</span></td>
+      <td class="small">${detail || "-"}</td>
+    `;
+    body.appendChild(tr);
+  });
+
+  const msg = `Hola Maxi! Te consulto mis pagos de clases.
+Mi email: ${profile.email || "-"}
+Mes actual: ${monthKey(new Date())}
+¿Me confirmás estado y medios de pago?`;
+  $("btnWAPagos").href = waLink(msg);
+}
+
   </script>
 </body>
 </html>
+
 
 
