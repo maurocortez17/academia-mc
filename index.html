@@ -1439,9 +1439,132 @@ Mes actual: ${monthKey(new Date())}
   $("btnWAPagos").href = waLink(msg);
 }
 
+/* =========================================================
+   🔐 SISTEMA DE PAGOS MENSUALES + CAPÍTULOS LAPICINI
+   ========================================================= */
+
+/* ====== HELPERS DE PAGOS ====== */
+function monthKey(date = new Date()){
+  const y = date.getFullYear();
+  const m = String(date.getMonth()+1).padStart(2,"0");
+  return `${y}-${m}`; // ej: 2025-03
+}
+
+/* ====== UI PAGOS (ALUMNO) ====== */
+function renderPagosAlumno(profile){
+  const pagosBox = document.getElementById("pagosAlumno");
+  if(!pagosBox) return;
+
+  const pagos = profile.pagos || {};
+  pagosBox.innerHTML = "";
+
+  const meses = Object.keys(pagos).sort().reverse();
+  if(meses.length === 0){
+    pagosBox.innerHTML = `<p class="small">Todavía no hay pagos registrados.</p>`;
+    return;
+  }
+
+  meses.forEach(m=>{
+    const p = pagos[m];
+    const ok = p.status === "pago";
+    const div = document.createElement("div");
+    div.className = "badge";
+    div.textContent = `${m} • ${ok ? "Pagado ✅" : "Adeuda ⚠️"}`;
+    pagosBox.appendChild(div);
+  });
+}
+
+/* ====== UI CAPÍTULOS LAPICINI ====== */
+function updateLapiciniCaps(profile){
+  const cap2 = document.getElementById("cap2Section");
+  if(!cap2) return;
+
+  const pagoMes = profile.pagos?.[monthKey()]?.status === "pago";
+  const acceso = profile.lapiciniAccess || pagoMes;
+
+  cap2.style.display = acceso ? "block" : "none";
+}
+
+/* ====== ADMIN – TOGGLE PAGO ====== */
+async function togglePagoMensual(uid){
+  const ref = doc(db,"usuarios",uid);
+  const snap = await getDoc(ref);
+  if(!snap.exists()) return;
+
+  const data = snap.data();
+  const ym = monthKey();
+  const actual = data.pagos?.[ym]?.status === "pago";
+
+  const update = {};
+  update[`pagos.${ym}`] = {
+    status: actual ? "deuda" : "pago",
+    at: Date.now()
+  };
+
+  await updateDoc(ref, update);
+  await refreshAdmin();
+}
+
+/* ====== EXTENDER PANEL ADMIN ====== */
+const oldRefreshAdmin = refreshAdmin;
+refreshAdmin = async function(){
+  await oldRefreshAdmin();
+
+  document.querySelectorAll("#adminBody tr").forEach(tr=>{
+    const btn = document.createElement("button");
+    btn.className = "btn ghost";
+    btn.textContent = "Pago mes";
+    const uid = tr.querySelector("button[data-toggle]")?.dataset.toggle;
+    if(!uid) return;
+
+    btn.onclick = ()=>togglePagoMensual(uid);
+    tr.lastElementChild.appendChild(btn);
+  });
+};
+
+/* ====== CAPÍTULO 2 – GALERÍA DECORATIVA ====== */
+function renderCapitulo2(){
+  const grid = document.getElementById("cap2Grid");
+  if(!grid) return;
+
+  const escenas = [
+    { img:"escena1.jpg", txt:"Escena inicial • Luz" },
+    { img:"escena2.jpg", txt:"Lapicini despierta" },
+    { img:"escena3.jpg", txt:"Arte final • Capítulo 2" }
+  ];
+
+  grid.innerHTML = "";
+  escenas.forEach(e=>{
+    const d = document.createElement("div");
+    d.className = "thumb";
+    d.innerHTML = `
+      <img src="${e.img}">
+      <div class="cap">${e.txt}</div>
+    `;
+    grid.appendChild(d);
+  });
+}
+
+/* ====== ENGANCHE CON AUTH ====== */
+const oldAuth = onAuthStateChanged;
+onAuthStateChanged(auth, async(user)=>{
+  if(!user) return;
+
+  const ref = doc(db,"usuarios",user.uid);
+  const snap = await getDoc(ref);
+  if(!snap.exists()) return;
+
+  const profile = snap.data();
+
+  renderPagosAlumno(profile);
+  updateLapiciniCaps(profile);
+  renderCapitulo2();
+});
+
   </script>
 </body>
 </html>
+
 
 
 
