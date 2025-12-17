@@ -1474,3 +1474,36 @@ Quiero confirmar mi estado de pagos.`;
     renderProducts();
     updateWhatsappButtons();
 
+  </script>
+
+  <script>
+    // ✅ FIX CLICK: evita que el "gate" te bloquee la pantalla cuando está oculto
+    (function(){
+      function fixGatePointerEvents(){
+        const gate = document.getElementById("gate");
+        if(!gate) return;
+        // Si NO está visible, que NO capture clicks
+        if(!gate.classList.contains("show")){
+          gate.style.pointerEvents = "none";
+        } else {
+          gate.style.pointerEvents = "auto";
+        }
+      }
+
+      fixGatePointerEvents();
+      setTimeout(fixGatePointerEvents, 200);
+      setTimeout(fixGatePointerEvents, 1000);
+
+      // Si en algún momento se muestra/oculta
+      const gate = document.getElementById("gate");
+      if(gate){
+        const obs = new MutationObserver(fixGatePointerEvents);
+        obs.observe(gate, { attributes:true, attributeFilter:["class"] });
+      }
+    })();
+  </script>
+
+</body>
+</html>
+
+      
