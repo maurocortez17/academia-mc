@@ -362,7 +362,7 @@
         <div class="gate-hero">
           <h3 style="margin:0 0 6px">¿Qué vas a encontrar adentro?</h3>
           <p class="small" style="margin:0 0 10px">
-            Inscripción por sedes y turnos, galería, <b>alumnos destacados</b> y el <b>Mundo Lapicini</b>.
+            Inscripción por sedes y turnos, galería, <b>alumnos destacados</b>, <b>pagos</b> y el <b>Mundo Lapicini</b>.
             El <b>Capítulo 1</b> se desbloquea con acceso habilitado (pago confirmado).
           </p>
           <div class="row" style="gap:8px">
@@ -370,7 +370,7 @@
             <span class="chip">Las Vertientes</span>
             <span class="chip">Alcira Gigena</span>
             <span class="chip">Destacados 2025</span>
-            <span class="chip">Capítulo 1 bloqueado</span>
+            <span class="chip">Pagos</span>
           </div>
           <img src="lapicini.png" alt="Lapicini"/>
           <div class="hr"></div>
@@ -452,6 +452,8 @@
           <button class="tab-btn" data-tab="galeria">Galería <small>obras de alumnos</small></button>
           <button class="tab-btn" data-tab="destacados">Alumnos Destacados <small>expo & 2025</small></button>
           <button class="tab-btn" data-tab="lapicini">Mundo Lapicini <small>capítulo 1</small></button>
+          <button class="tab-btn" data-tab="cap2">Capítulo 2 <small>escenas</small></button>
+          <button class="tab-btn" data-tab="pagos">Mis Pagos <small>estado mensual</small></button>
           <button class="tab-btn" data-tab="sobre">Sobre Maxi <small>historia y redes</small></button>
           <button class="tab-btn" data-tab="admin" id="tabAdmin">Panel Admin MC <small>solo profe</small></button>
         </div>
@@ -525,7 +527,6 @@
             </div>
           </div>
         </div>
-
         <!-- GALERIA (local por ahora) -->
         <div class="section" id="galeria">
           <div class="title">
@@ -626,7 +627,7 @@
           <div id="destGrid" class="gallery"></div>
         </div>
 
-                <!-- LAPICINI -->
+        <!-- LAPICINI -->
         <div class="section" id="lapicini">
           <div class="title">
             <div>
@@ -752,12 +753,10 @@
           </div>
 
           <div class="grid">
-            <!-- Escena 1 -->
             <div class="card">
               <h3 style="margin:0 0 8px">Escena 1 — El despertar</h3>
               <p class="small">
-                Primeros indicios de la luz. Lapicini comienza a comprender que el dibujo
-                no solo representa, sino que transforma.
+                Primeros indicios de la luz. Lapicini comienza a comprender que el dibujo no solo representa, sino que transforma.
               </p>
               <div class="thumb" style="margin-top:10px">
                 <img src="escena1.jpg" alt="Escena 1 Lapicini">
@@ -765,31 +764,26 @@
               </div>
             </div>
 
-            <!-- Escena 2 -->
             <div class="card">
               <h3 style="margin:0 0 8px">Escena 2 — La prueba</h3>
-              <p class="small">
-                El conflicto aparece. La luz se pone a prueba y el trazo se vuelve decisión.
-              </p>
+              <p class="small">El conflicto aparece. La luz se pone a prueba y el trazo se vuelve decisión.</p>
               <div class="thumb" style="margin-top:10px">
                 <img src="escena2.jpg" alt="Escena 2 Lapicini">
                 <div class="cap">Ilustración narrativa • Capítulo 2</div>
               </div>
             </div>
 
-            <!-- Escena 3 -->
             <div class="card">
               <h3 style="margin:0 0 8px">Escena 3 — El mensaje</h3>
-              <p class="small">
-                Lapicini entiende que el don recibido debe compartirse.
-                El arte como puente y sanación.
-              </p>
+              <p class="small">Lapicini entiende que el don recibido debe compartirse. El arte como puente y sanación.</p>
               <div class="thumb" style="margin-top:10px">
                 <img src="escena3.jpg" alt="Escena 3 Lapicini">
                 <div class="cap">Arte final • Capítulo 2</div>
               </div>
             </div>
           </div>
+
+          <p class="hint">Tip: subí tus imágenes como escena1.jpg, escena2.jpg, escena3.jpg en el repo (o cambiá los nombres acá).</p>
         </div>
 
         <!-- PAGOS -->
@@ -866,7 +860,7 @@
           <div class="title">
             <div>
               <h2>Panel Admin MC</h2>
-              <p>Solo profesor. Activá “Pago Lapicini” para desbloquear Capítulo 1 (Firestore).</p>
+              <p>Solo profesor. Activá pago Lapicini y registrá pagos mensuales (Firestore).</p>
             </div>
             <span class="badge">Admin: maurocortez17@gmail.com</span>
           </div>
@@ -875,6 +869,7 @@
             <h3 style="margin:0 0 8px">Usuarios registrados (Firestore)</h3>
             <div class="row" style="margin-bottom:10px">
               <button class="btn ghost" id="btnRefrescarAdmin" type="button">Refrescar</button>
+              <span class="badge" id="adminHint">Tip: podés marcar pagos por mes abajo</span>
             </div>
 
             <div style="overflow:auto">
@@ -883,7 +878,9 @@
                   <tr>
                     <th>Nombre</th>
                     <th>Email</th>
-                    <th>Pago Lapicini</th>
+                    <th>Lapicini</th>
+                    <th>Pago mes (YYYY-MM)</th>
+                    <th>Estado</th>
                     <th>Acción</th>
                   </tr>
                 </thead>
@@ -891,9 +888,10 @@
               </table>
             </div>
 
-            <p class="hint">Próximo paso: pagos mensuales y cupos por turno.</p>
+            <p class="hint">Esto ya controla: acceso Lapicini + pagos mensuales (pago/deuda). (Las imágenes aún son locales.)</p>
           </div>
         </div>
+
       </section>
     </main>
 
@@ -901,10 +899,10 @@
       © <span id="year"></span> Academia de Arte MC — Maxi Cortez • Hecho con amor y visión 💚
     </footer>
   </div>
-
   <!-- ======= APP SCRIPT (Firebase + UI) ======= -->
   <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+    // ✅ IMPORTS (UNA SOLA VEZ) — esto arregla el bug del "no clickea nada"
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
     import {
       getAuth,
       createUserWithEmailAndPassword,
@@ -912,7 +910,7 @@
       signOut,
       onAuthStateChanged,
       updateProfile
-    } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+    } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
     import {
       getFirestore,
       doc,
@@ -922,8 +920,9 @@
       collection,
       getDocs,
       query,
-      orderBy
-    } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+      orderBy,
+      serverTimestamp
+    } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
 
     // ===== CONFIG =====
     const WHATSAPP = "5493584361289";
@@ -948,6 +947,11 @@
     function toast(msg){ alert(msg); }
     function showGate(){ $("gate").classList.add("show"); document.body.style.overflow="hidden"; }
     function hideGate(){ $("gate").classList.remove("show"); document.body.style.overflow=""; }
+    function monthKey(date = new Date()){
+      const y = date.getFullYear();
+      const m = String(date.getMonth()+1).padStart(2,"0");
+      return `${y}-${m}`;
+    }
 
     // ===== OJITO =====
     document.querySelectorAll(".eye").forEach(btn=>{
@@ -971,7 +975,7 @@
       loginBox.style.display = "block";
     });
 
-    // ===== Tabs =====
+    // ===== Tabs (FIX clic) =====
     const tabButtons = document.querySelectorAll(".tab-btn");
     const sections = document.querySelectorAll(".content .section");
     tabButtons.forEach(btn=>{
@@ -980,6 +984,7 @@
         btn.classList.add("active");
         const id = btn.dataset.tab;
         sections.forEach(s=>s.classList.toggle("active", s.id === id));
+        window.scrollTo({ top: 0, behavior: "smooth" });
       });
     });
 
@@ -1194,6 +1199,7 @@ Mi email: ${(auth.currentUser?.email || "-")}`;
         grid.appendChild(el);
       });
     }
+
     $("btnAddProd").addEventListener("click", async ()=>{
       const cat = $("prodCat").value;
       const name = $("prodName").value.trim();
@@ -1210,6 +1216,7 @@ Mi email: ${(auth.currentUser?.email || "-")}`;
       renderProducts();
       toast("🛍️ Producto agregado (local).");
     });
+
     $("btnClearProd").addEventListener("click", ()=>{
       if(confirm("¿Borrar todos los productos en este dispositivo?")){
         localStorage.removeItem("mc_products");
@@ -1218,7 +1225,25 @@ Mi email: ${(auth.currentUser?.email || "-")}`;
     });
     $("prodFilter").addEventListener("change", renderProducts);
 
-    // ===== Firebase Auth: Register/Login/Logout =====
+    // ===== Firestore profile =====
+    async function ensureUserDoc(user, nombreFallback=""){
+      const ref = doc(db, "users", user.uid);
+      const snap = await getDoc(ref);
+      if(!snap.exists()){
+        await setDoc(ref, {
+          nombre: user.displayName || nombreFallback || "Alumno/a",
+          email: user.email || "",
+          paidLapicini: (user.email || "").toLowerCase() === ADMIN_EMAIL.toLowerCase(),
+          pagos: {},
+          createdAt: serverTimestamp(),
+          updatedAt: serverTimestamp()
+        });
+      } else {
+        await updateDoc(ref, { updatedAt: serverTimestamp() });
+      }
+    }
+
+    // ===== Auth: Register/Login/Logout =====
     $("btnRegister").addEventListener("click", async ()=>{
       const nombre = $("regNombre").value.trim();
       const email  = $("regEmail").value.trim().toLowerCase();
@@ -1232,14 +1257,7 @@ Mi email: ${(auth.currentUser?.email || "-")}`;
       try{
         const cred = await createUserWithEmailAndPassword(auth, email, pass);
         await updateProfile(cred.user, { displayName: nombre });
-
-        await setDoc(doc(db, "users", cred.user.uid), {
-          nombre,
-          email,
-          paidLapicini: (email === ADMIN_EMAIL),
-          createdAt: Date.now()
-        });
-
+        await ensureUserDoc(cred.user, nombre);
         toast("✅ Cuenta creada. Entrando...");
       }catch(e){
         toast(e?.message || String(e));
@@ -1277,61 +1295,141 @@ Quiero el link de pago y habilitación.`;
       $("btnWAUnlock").href = waLink(msg);
     }
 
+       // ===== PAGOS (Firestore) =====
+    function renderPagos(pagosObj, email){
+      const tbody = $("payBody");
+      tbody.innerHTML = "";
+
+      const ym = monthKey(new Date());
+      $("badgePagoHoy").textContent = `Mes: ${ym}`;
+
+      const keys = Object.keys(pagosObj || {}).sort().reverse();
+
+      if(keys.length === 0){
+        tbody.innerHTML = `<tr><td colspan="3" class="small">Todavía no hay pagos registrados. Consultá por WhatsApp.</td></tr>`;
+      } else {
+        keys.forEach(k=>{
+          const p = pagosObj[k] || {};
+          const status = (p.status || "deuda").toLowerCase();
+          const badge = status === "pago" ? "✅ Pago" : "⚠️ Deuda";
+          const method = p.method ? `Método: ${p.method}` : "";
+          const note = p.note ? ` • ${p.note}` : "";
+          tbody.insertAdjacentHTML("beforeend", `
+            <tr>
+              <td>${k}</td>
+              <td><span class="badge">${badge}</span></td>
+              <td class="small">${method}${note}</td>
+            </tr>
+          `);
+        });
+      }
+
+      const waMsg = `Hola Maxi! Consulta de pagos Academia MC.
+Mi email: ${email || "-"}
+Mes actual: ${ym}
+Quiero confirmar mi estado de pagos.`;
+      $("btnWAPagos").href = waLink(waMsg);
+    }
+
     // ===== Admin panel (Firestore) =====
+    function enforceAdminVisibility(isAdmin){
+      $("tabAdmin").style.display = isAdmin ? "flex" : "none";
+    }
+
     async function refreshAdmin(){
       const body = $("adminBody");
       body.innerHTML = "";
-      if(auth.currentUser?.email !== ADMIN_EMAIL){
-        body.innerHTML = `<tr><td colspan="4" class="small">Acceso denegado. Solo profesor.</td></tr>`;
+
+      if((auth.currentUser?.email || "").toLowerCase() !== ADMIN_EMAIL.toLowerCase()){
+        body.innerHTML = `<tr><td colspan="6" class="small">Acceso denegado. Solo profesor.</td></tr>`;
         return;
       }
 
-      const qy = query(collection(db, "users"), orderBy("createdAt", "desc"));
-      const snap = await getDocs(qy);
+      const q = query(collection(db, "users"), orderBy("createdAt", "desc"));
+      const snap = await getDocs(q);
       if(snap.empty){
-        body.innerHTML = `<tr><td colspan="4" class="small">Todavía no hay usuarios.</td></tr>`;
+        body.innerHTML = `<tr><td colspan="6" class="small">Todavía no hay usuarios.</td></tr>`;
         return;
       }
 
       snap.forEach(docSnap=>{
         const u = docSnap.data();
         const uid = docSnap.id;
+
+        const paid = !!u.paidLapicini;
+        const paidTxt = paid ? "Sí ✅" : "No 🔒";
+
         const tr = document.createElement("tr");
         tr.innerHTML = `
           <td>${u.nombre || "-"}</td>
           <td>${u.email || "-"}</td>
-          <td><span class="badge">${u.paidLapicini ? "Sí ✅" : "No 🔒"}</span></td>
+          <td><span class="badge">${paidTxt}</span></td>
+          <td><input data-month="${uid}" placeholder="Ej: 2026-03" value="${monthKey(new Date())}" /></td>
+          <td>
+            <select data-status="${uid}">
+              <option value="pago">pago</option>
+              <option value="deuda">deuda</option>
+            </select>
+          </td>
           <td class="row" style="gap:8px">
-            <button class="btn ghost" data-toggle="${uid}" type="button">Toggle Pago</button>
+            <button class="btn ghost" data-toggle="${uid}" type="button">Toggle Lapicini</button>
+            <button class="btn primary" data-savepay="${uid}" type="button">Guardar pago</button>
           </td>
         `;
         body.appendChild(tr);
       });
 
+      // Toggle Lapicini
       body.querySelectorAll("button[data-toggle]").forEach(btn=>{
         btn.addEventListener("click", async ()=>{
           const uid = btn.getAttribute("data-toggle");
           const ref = doc(db, "users", uid);
-          const snap = await getDoc(ref);
-          if(!snap.exists()) return;
-          const cur = snap.data();
-          const next = !cur.paidLapicini;
-          await updateDoc(ref, { paidLapicini: next });
+          const s = await getDoc(ref);
+          if(!s.exists()) return;
+          const cur = s.data();
+          await updateDoc(ref, { paidLapicini: !cur.paidLapicini, updatedAt: serverTimestamp() });
 
           if(auth.currentUser?.uid === uid){
-            updateLapiciniAccessUI(next);
+            updateLapiciniAccessUI(!cur.paidLapicini);
           }
           await refreshAdmin();
         });
       });
+
+      // Guardar pago mensual (Firestore: users/{uid}.pagos.YYYY-MM)
+      body.querySelectorAll("button[data-savepay]").forEach(btn=>{
+        btn.addEventListener("click", async ()=>{
+          const uid = btn.getAttribute("data-savepay");
+          const ymInput = body.querySelector(`input[data-month="${uid}"]`);
+          const stSel = body.querySelector(`select[data-status="${uid}"]`);
+          const ym = (ymInput?.value || "").trim();
+          const st = (stSel?.value || "deuda").trim();
+
+          if(!/^\d{4}-\d{2}$/.test(ym)){
+            toast("Mes inválido. Usá formato YYYY-MM (ej: 2026-03).");
+            return;
+          }
+
+          const ref = doc(db, "users", uid);
+          const payload = {};
+          payload[`pagos.${ym}`] = { status: st, method: "manual", note: "", at: serverTimestamp() };
+          await updateDoc(ref, payload);
+
+          // Si es el usuario actual, refrescar su tabla de pagos
+          if(auth.currentUser?.uid === uid){
+            const s = await getDoc(ref);
+            const u = s.data();
+            renderPagos(u.pagos || {}, u.email || "");
+          }
+
+          toast("✅ Pago guardado.");
+        });
+      });
     }
+
     $("btnRefrescarAdmin").addEventListener("click", refreshAdmin);
 
-    function enforceAdminVisibility(isAdmin){
-      $("tabAdmin").style.display = isAdmin ? "flex" : "none";
-    }
-
-    // ===== Auth state =====
+    // ===== Auth state (UNA SOLA VEZ) =====
     onAuthStateChanged(auth, async (user)=>{
       $("year").textContent = new Date().getFullYear();
 
@@ -1340,234 +1438,38 @@ Quiero el link de pago y habilitación.`;
         enforceAdminVisibility(false);
         return;
       }
+
+      await ensureUserDoc(user);
       hideGate();
 
       const ref = doc(db, "users", user.uid);
       const snap = await getDoc(ref);
+      const profile = snap.exists()
+        ? snap.data()
+        : { nombre: user.displayName || "Alumno/a", email: user.email, paidLapicini:false, pagos:{} };
 
-      let profile = null;
-      if(snap.exists()){
-        profile = snap.data();
-      } else {
-        profile = { nombre: user.displayName || "Alumno/a", email: user.email, paidLapicini: false, createdAt: Date.now() };
-        await setDoc(ref, profile);
-      }
-
-      $("userLine").textContent = `Sesión: ${profile.nombre} • ${profile.email}`;
+      $("userLine").textContent = `Sesión: ${profile.nombre || "Alumno/a"} • ${profile.email || ""}`;
       $("inNombre").value = profile.nombre || "";
       $("inEmail").value  = profile.email || "";
 
-      const isAdmin = (profile.email === ADMIN_EMAIL);
+      const isAdmin = (profile.email || "").toLowerCase() === ADMIN_EMAIL.toLowerCase();
       enforceAdminVisibility(isAdmin);
-      updateLapiciniAccessUI(!!profile.paidLapicini);
 
+      updateLapiciniAccessUI(!!profile.paidLapicini);
+      renderPagos(profile.pagos || {}, profile.email || "");
+
+      // Render local:
       renderGaleria();
       renderDestacados();
       renderProducts();
-      updateWhatsappButtons();
 
       if(isAdmin){
         await refreshAdmin();
       }
     });
 
-    // Inicial render local:
+    // Render inicial local:
     renderGaleria();
     renderDestacados();
     renderProducts();
     updateWhatsappButtons();
-
-// ===== PAGOS MENSUALES (CLASES) =====
-function monthKey(date = new Date()){
-  const y = date.getFullYear();
-  const m = String(date.getMonth() + 1).padStart(2, "0");
-  return `${y}-${m}`; // ej: 2025-12
-}
-
-function statusLabel(s){
-  if(s === "pago") return "PAGADO ✅";
-  if(s === "deuda") return "DEBE 🔴";
-  return "SIN REGISTRO ⚪";
-}
-
-async function setPagoMes(uid, ym, status, extra = {}){
-  const ref = doc(db, "users", uid);
-  const payload = {};
-  payload[`pagos.${ym}`] = {
-    status,                      // "pago" | "deuda"
-    amount: extra.amount || "",  // opcional
-    method: extra.method || "manual",
-    note: extra.note || "",
-    at: Date.now()
-  };
-  await updateDoc(ref, payload);
-}
-
-function renderMisPagos(profile){
-  const body = $("payBody");
-  body.innerHTML = "";
-  const pagos = profile.pagos || {};
-  const ahora = new Date();
-  $("badgePagoHoy").textContent = `Mes: ${monthKey(ahora)}`;
-
-  // últimos 8 meses (incluye el actual)
-  const months = [];
-  for(let i=0;i<8;i++){
-    const d = new Date(ahora.getFullYear(), ahora.getMonth()-i, 1);
-    months.push(monthKey(d));
-  }
-
-  months.forEach(ym=>{
-    const info = pagos[ym] || null;
-    const st = info?.status || "";
-    const detail = [
-      info?.amount ? `💲${info.amount}` : "",
-      info?.method ? `(${info.method})` : "",
-      info?.note ? `• ${info.note}` : ""
-    ].filter(Boolean).join(" ");
-    const tr = document.createElement("tr");
-    tr.innerHTML = `
-      <td>${ym}</td>
-      <td><span class="badge">${statusLabel(st)}</span></td>
-      <td class="small">${detail || "-"}</td>
-    `;
-    body.appendChild(tr);
-  });
-
-  const msg = `Hola Maxi! Te consulto mis pagos de clases.
-Mi email: ${profile.email || "-"}
-Mes actual: ${monthKey(new Date())}
-¿Me confirmás estado y medios de pago?`;
-  $("btnWAPagos").href = waLink(msg);
-}
-
-/* =========================================================
-   🔐 SISTEMA DE PAGOS MENSUALES + CAPÍTULOS LAPICINI
-   ========================================================= */
-
-/* ====== HELPERS DE PAGOS ====== */
-function monthKey(date = new Date()){
-  const y = date.getFullYear();
-  const m = String(date.getMonth()+1).padStart(2,"0");
-  return `${y}-${m}`; // ej: 2025-03
-}
-
-/* ====== UI PAGOS (ALUMNO) ====== */
-function renderPagosAlumno(profile){
-  const pagosBox = document.getElementById("pagosAlumno");
-  if(!pagosBox) return;
-
-  const pagos = profile.pagos || {};
-  pagosBox.innerHTML = "";
-
-  const meses = Object.keys(pagos).sort().reverse();
-  if(meses.length === 0){
-    pagosBox.innerHTML = `<p class="small">Todavía no hay pagos registrados.</p>`;
-    return;
-  }
-
-  meses.forEach(m=>{
-    const p = pagos[m];
-    const ok = p.status === "pago";
-    const div = document.createElement("div");
-    div.className = "badge";
-    div.textContent = `${m} • ${ok ? "Pagado ✅" : "Adeuda ⚠️"}`;
-    pagosBox.appendChild(div);
-  });
-}
-
-/* ====== UI CAPÍTULOS LAPICINI ====== */
-function updateLapiciniCaps(profile){
-  const cap2 = document.getElementById("cap2Section");
-  if(!cap2) return;
-
-  const pagoMes = profile.pagos?.[monthKey()]?.status === "pago";
-  const acceso = profile.lapiciniAccess || pagoMes;
-
-  cap2.style.display = acceso ? "block" : "none";
-}
-
-/* ====== ADMIN – TOGGLE PAGO ====== */
-async function togglePagoMensual(uid){
-  const ref = doc(db,"usuarios",uid);
-  const snap = await getDoc(ref);
-  if(!snap.exists()) return;
-
-  const data = snap.data();
-  const ym = monthKey();
-  const actual = data.pagos?.[ym]?.status === "pago";
-
-  const update = {};
-  update[`pagos.${ym}`] = {
-    status: actual ? "deuda" : "pago",
-    at: Date.now()
-  };
-
-  await updateDoc(ref, update);
-  await refreshAdmin();
-}
-
-/* ====== EXTENDER PANEL ADMIN ====== */
-const oldRefreshAdmin = refreshAdmin;
-refreshAdmin = async function(){
-  await oldRefreshAdmin();
-
-  document.querySelectorAll("#adminBody tr").forEach(tr=>{
-    const btn = document.createElement("button");
-    btn.className = "btn ghost";
-    btn.textContent = "Pago mes";
-    const uid = tr.querySelector("button[data-toggle]")?.dataset.toggle;
-    if(!uid) return;
-
-    btn.onclick = ()=>togglePagoMensual(uid);
-    tr.lastElementChild.appendChild(btn);
-  });
-};
-
-/* ====== CAPÍTULO 2 – GALERÍA DECORATIVA ====== */
-function renderCapitulo2(){
-  const grid = document.getElementById("cap2Grid");
-  if(!grid) return;
-
-  const escenas = [
-    { img:"escena1.jpg", txt:"Escena inicial • Luz" },
-    { img:"escena2.jpg", txt:"Lapicini despierta" },
-    { img:"escena3.jpg", txt:"Arte final • Capítulo 2" }
-  ];
-
-  grid.innerHTML = "";
-  escenas.forEach(e=>{
-    const d = document.createElement("div");
-    d.className = "thumb";
-    d.innerHTML = `
-      <img src="${e.img}">
-      <div class="cap">${e.txt}</div>
-    `;
-    grid.appendChild(d);
-  });
-}
-
-/* ====== ENGANCHE CON AUTH ====== */
-const oldAuth = onAuthStateChanged;
-onAuthStateChanged(auth, async(user)=>{
-  if(!user) return;
-
-  const ref = doc(db,"usuarios",user.uid);
-  const snap = await getDoc(ref);
-  if(!snap.exists()) return;
-
-  const profile = snap.data();
-
-  renderPagosAlumno(profile);
-  updateLapiciniCaps(profile);
-  renderCapitulo2();
-});
-
-  </script>
-</body>
-</html>
-
-
-
-
-
