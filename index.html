@@ -340,6 +340,14 @@
       place-items:center;
       user-select:none;
     }
+    /* 🔧 FIX DEFINITIVO: el gate NO bloquea clics cuando está oculto */
+#gate {
+  pointer-events: none;
+}
+
+#gate.show {
+  pointer-events: auto;
+}
   </style>
 </head>
 
@@ -1507,3 +1515,4 @@ Quiero confirmar mi estado de pagos.`;
 </html>
 
       
+
